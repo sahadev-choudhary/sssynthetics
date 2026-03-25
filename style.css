@@ -88,10 +88,11 @@ ul { list-style: none; }
   top: 0; left: 0; right: 0;
   z-index: 1000;
   padding: 20px 0;
+  background: transparent;
   transition: background var(--transition), padding var(--transition), box-shadow var(--transition);
 }
 .navbar.scrolled {
-  background: rgba(255, 249, 244, 0.95);
+  background: rgba(255, 249, 244, 0.97);
   backdrop-filter: blur(20px);
   padding: 12px 0;
   box-shadow: var(--shadow-sm);
@@ -125,9 +126,10 @@ ul { list-style: none; }
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--clr-text);
+  color: white;
+  transition: color var(--transition);
 }
-.navbar.hero-nav .logo-main { color: white; }
+.navbar.scrolled .logo-main { color: var(--clr-text); }
 .logo-sub {
   font-size: 0.65rem;
   letter-spacing: 0.1em;
@@ -142,9 +144,12 @@ ul { list-style: none; }
 .nav-links a {
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--clr-text-muted);
+  color: rgba(255,255,255,0.85);
   transition: color var(--transition);
   position: relative;
+}
+.navbar.scrolled .nav-links a {
+  color: var(--clr-text-muted);
 }
 .nav-links a::after {
   content: '';
@@ -156,7 +161,8 @@ ul { list-style: none; }
   transform-origin: left;
   transition: transform var(--transition);
 }
-.nav-links a:hover { color: var(--clr-text); }
+.nav-links a:hover { color: white; }
+.navbar.scrolled .nav-links a:hover { color: var(--clr-text); }
 .nav-links a:hover::after { transform: scaleX(1); }
 .nav-actions {
   display: flex;
@@ -189,14 +195,17 @@ ul { list-style: none; }
   border: none;
   cursor: pointer;
   padding: 4px;
+  z-index: 1001;
+  position: relative;
 }
 .hamburger span {
   display: block;
   width: 24px; height: 2px;
-  background: var(--clr-text);
+  background: white;
   border-radius: 2px;
-  transition: transform var(--transition), opacity var(--transition);
+  transition: transform var(--transition), opacity var(--transition), background var(--transition);
 }
+.navbar.scrolled .hamburger span { background: var(--clr-text); }
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -416,7 +425,6 @@ ul { list-style: none; }
   border-radius: var(--radius-lg);
   overflow: hidden;
   cursor: pointer;
-  group: true;
   box-shadow: var(--shadow-md);
   transition: transform var(--transition), box-shadow var(--transition);
 }
