@@ -1,15 +1,21 @@
 // ─── S S SYNTHETICS — script.js ────────────────────────
 
-// ── 1. NAVBAR: scroll behaviour ──────────────────────────
+// ── 1. NAVBAR: transparent over hero, solid after ────────
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) {
+const heroSection = document.getElementById('home');
+
+function updateNavbar() {
+  const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : window.innerHeight;
+  if (window.scrollY + navbar.offsetHeight >= heroBottom) {
     navbar.classList.add('scrolled');
-    navbar.classList.remove('hero-nav');
   } else {
     navbar.classList.remove('scrolled');
   }
-}, { passive: true });
+}
+
+window.addEventListener('scroll', updateNavbar, { passive: true });
+window.addEventListener('resize', updateNavbar, { passive: true });
+updateNavbar(); // run on load
 
 // ── 2. MOBILE HAMBURGER ───────────────────────────────────
 const hamburger = document.getElementById('hamburger');
